@@ -2,13 +2,20 @@ import React from "react";
 
 const ConfirmationModal = ({ onConfirm, onCancel, children }) => {
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <p>{children || "Are you sure you want to proceed?"}</p>
-        <button onClick={onConfirm}>Confirm</button>
-        <button onClick={onCancel}>Cancel</button>
-      </div>
-    </div>
+    <Modal show={show} onHide={onHide}>
+      <Modal.Header closeButton>
+        <Modal.Title>Delete Customer</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Are you sure you want to delete this customer?</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onHide}>
+          Close
+        </Button>
+        <Button variant="danger" onClick={onConfirm}>
+          Delete
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

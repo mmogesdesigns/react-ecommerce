@@ -8,21 +8,3 @@
     text-align: center;
     padding: 20px;
 }
-
-.links ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.links li {
-    margin: 10px;
-    font-size: 18px;
-}
-
-.highlights {
-    margin-top: 20px;
-}
-
-.highlights h2 {
-    color: #333;
-}
