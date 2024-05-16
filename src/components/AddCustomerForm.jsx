@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Form, Button } from "react-bootstrap";
+import { json } from 'react-router-dom';
 
 const AddCustomerForm = ({id}) => {
     const [customer, setCustomer] = useState({name:'', email: '', phone: ''});
@@ -28,15 +29,16 @@ const AddCustomerForm = ({id}) => {
 
         let response = null;
         if (id) {
-            response = await axios.put(`http://127.0.0.1:5000/customers/${id}`,{
-                body: customer,
-            });
+            response = await axios.put(`http://127.0.0.1:5000/customers/${id}`,
+                 customer,
+                 {header: {'Content-Type': 'application/json'}} 
+            );
             console.log(response.data);
             setMessage("Successfully Updated Customer!");
         } else{
-            response = await axios.post(`http://127.0.0.1:5000/customers`,{
-                body: customer,
-            });
+            response = await axios.post(`http://127.0.0.1:5000/customers`,
+               customer, {header: {'Content-Type': 'application-json'}} 
+            );
             console.log(response.data);
             setMessage('Successfully Created Customer!')
         }
@@ -74,6 +76,7 @@ const AddCustomerForm = ({id}) => {
         />
       </Form.Group>
       <Button type="submit">Add Customer</Button>
+      {message && <div>{message}</div>}
     </Form>
   );
 }

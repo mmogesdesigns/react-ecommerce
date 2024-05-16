@@ -2,7 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { Button, ListGroup, Modal } from "react-bootstrap";
-import AddCustomerForm from "./AddCustomerForm";
+import ConfirmationModal from "./ConfirmationModal";
+
+
+
 
 const Customers = () => {
     const [customers, setCustomers] = useState([]);
@@ -11,7 +14,7 @@ const Customers = () => {
     const [showModal,setShowModal ] = useState(false);
     const [customerIdToDelete, setCustomerIdToDelete] = useState(null);
    
-
+// old school way change later
     useEffect(() => {
         axios.get("http://127.0.0.1:5000/customers")
             .then(response => {
@@ -46,9 +49,9 @@ const Customers = () => {
   return (
     <div>
       <h1>Customers</h1>
-      <link to="/customers/add">
-        <button variant="primary">Add New Customer</button>
-      </link>
+      <Link to="/customers/add">
+        <Button variant="primary">Add New Customer</Button>
+      </Link>
       <ListGroup>
         {customers.map((customer) => (
           <ListGroup.Item key={customer.id}>
@@ -57,16 +60,21 @@ const Customers = () => {
               to={`/customers/edit/${customer.id}`}
               className="btn btn-info"
               style={{ marginLeft: "10px" }}
-            > Edit </Link>{" "}
+            >
+              {" "}
+              Edit{" "}
+            </Link>{" "}
           </ListGroup.Item>
         ))}
       </ListGroup>
 
-      {/* <ConfirmationModal
+      <ConfirmationModal
         show={showModal}
         onHide={() => setShowModal(false)}
-        onConfirm={() => handleDelete(customerIdToDelete)}
-      /> */}
+        onConfirm={handleDelete}
+        title="Confirm Delete"
+        message="are you sure you want to delete this customer?"
+      />
     </div>
   );
 }

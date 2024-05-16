@@ -1,12 +1,13 @@
 import React from "react";
+import { Modal, Button } from "react-bootstrap";
 
-const ConfirmationModal = ({ onConfirm, onCancel, children }) => {
+const ConfirmationModal = ({ show, onHide, onConfirm, title, messag }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Delete Customer</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Are you sure you want to delete this customer?</Modal.Body>
+      <Modal.Body>{message}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>
           Close
